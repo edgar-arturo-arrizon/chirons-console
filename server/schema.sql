@@ -31,18 +31,28 @@ CREATE TABLE clients(
 CREATE TABLE exercises(
   exercise_id SERIAL,
   name VARCHAR(255) NOT NULL,
-  best NUMERIC,
+  heaviest_weight NUMERIC,
   client_id SERIAL,
   trainer_id UUID,
   PRIMARY KEY (exercise_id),
   FOREIGN KEY (client_id) REFERENCES clients(client_id)
 );
 
+CREATE TABLE exercise_stats(
+  stat_id SERIAL,
+  sets INT NOT NULL,
+  reps INT NOT NULL,
+  weight NUMERIC,
+  performed_on DATE DEFAULT CURRENT_DATE,
+  exercise_id SERIAL,
+  PRIMARY KEY (stat_id),
+  FOREIGN KEY (exercise_id) REFERENCES exercises(exercise_id)
+);
+
 -- INSERT INTO trainers (first_name, last_name, email, password) VALUES ('el', 'capitan', 'el_capitan@gmail.com', 'elcapitan123');
 
 -- INSERT INTO clients (first_name, last_name) VALUES ('stephen', 'engblom');
 
--- INSERT INTO exercises (name, best) VALUES ('squat', '195.5');
+-- INSERT INTO exercises (name, heaviest_weight) VALUES ('squat', '195.5');
 
--- INSERT INTO clients (first_name, blog_body, trainer_id,)
--- SELECT * FROM trainers;
+-- INSERT INTO exercise_stats(sets, reps, weight) VALUES (3, 10,)

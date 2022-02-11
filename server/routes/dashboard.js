@@ -6,18 +6,18 @@ const dashboardRouter = express.Router();
 
 dashboardRouter.get('/', authorization, async (req, res) => {
   try {
-    console.log('dashboardRouter: GET request', req.user)
+    // console.log('dashboardRouter: GET request', req.trainer)
     const user = await pool.query(
-      "SELECT trainer_id WHERE trainer_id = $1",
-      [req.user]
+      "SELECT trainer_id FROM trainers WHERE trainer_id = $1",
+      [req.trainer]
     );
-    const clients = await pool.query(
-      "select * from clients where user_id = $1", [req.user]
-    );
+    // const clients = await pool.query(
+    //   "SELECT * FROM clients WHERE client_id = $1", [req.trainer]
+    // );
 
-    res.json([user.rows[0], blogs.rows]);
+    res.json([user.rows[0]]);
   } catch (err) {
-    console.error(err.message, 'Error at dashboard router, `/` GET route');
+    console.error('Error at dashboard router, `/` GET route', err.message);
     res.status(500).send("Server error");
   }
 });
