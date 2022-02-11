@@ -41,8 +41,6 @@ router.post('/login', validInfo, async (req, res) => {
       return res.status(401).send('Password or email is incorrect');
     }
 
-    console.log(trainer)
-
     const validPassword = await bcrypt.compare(password, trainer.rows[0].password);
 
     if(!validPassword) {

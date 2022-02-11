@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { toast } from "react-toastify";
 
 const Dashboard = ( { setAuth }) => {
-  const [name , setName] = useState('test');
+  const [name , setName] = useState('');
 
   const getProfile = async () => {
     try {
@@ -32,21 +32,34 @@ const Dashboard = ( { setAuth }) => {
     }
   };
 
-  // useEffect(() => {
-  //   setBlogsChange(false);
-  //   getProfile();
-  // }, [blogsChange]);
+  useEffect(() => {
+    // setBlogsChange(false);
+    getProfile();
+  }, []);
 
   return (
-    <div>
-
-        <h1 className="mt-5">Dashboard</h1>
+    <>
+    <div className="bg-blue-600 h-screen">
+      <div name="dashboard">
+        <h1 className="">Dashboard</h1>
         <h2>Welcome {name}</h2>
         <button onClick={(e) => logout(e)} className="btn btn-primary">
           Logout
         </button>
+      </div>
+
+      <div name="filter + list">
+        <div>
+          Filter
+        </div>
+        <div>
+          client list
+        </div>
+      </div>
+
 
     </div>
+    </>
   )
 }
 
