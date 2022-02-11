@@ -55,11 +55,11 @@ const Login = ( { setAuth }) => {
           <form className="space-y-8">
             <div>
               <label className="block mb-1 font-bold">Email</label>
-              <input className="border border-gray-400 text-xl w-full p-3" type="text" placeholder="Email" />
+              <input className="border border-gray-400 text-xl w-full p-3" type="text" placeholder="Email" value={email} onChange={(e) => handleChange(e)}/>
             </div>
             <div>
               <label className="block mb-1 font-bold">Password</label>
-              <input className="border border-gray-400 text-xl w-full p-3" type={passwordShown ? "text" : "password"} placeholder="Password" />
+              <input className="border border-gray-400 text-xl w-full p-3" type={passwordShown ? "text" : "password"} placeholder="Password" value={password} onChange={(e) => handleChange(e)}/>
               <input type="checkbox" checked={passwordShown}
           onChange={handleOnCheck}/> show password
             </div>

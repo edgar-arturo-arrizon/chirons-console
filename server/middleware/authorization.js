@@ -13,7 +13,6 @@ export default function async (req, res, next) {
   try {
     const verify = jwt.verify(token, process.env.jwtSecret);
     req.trainer = verify.id;
-    // console.log('auth', req.trainer, verify)
     next();
 
   } catch (err) {

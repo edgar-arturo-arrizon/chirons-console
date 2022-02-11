@@ -8,9 +8,10 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE trainers(
 trainer_id uuid DEFAULT uuid_generate_v4(),
-trainer_handle VARCHAR(35) NOT NULL,
-trainer_email VARCHAR(50) NOT NULL UNIQUE,
-trainer_password VARCHAR(255) NOT NULL,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+email VARCHAR(50) NOT NULL UNIQUE,
+password VARCHAR(255) NOT NULL,
 PRIMARY KEY (trainer_id)
 );
 
@@ -36,7 +37,7 @@ CREATE TABLE exercises(
   FOREIGN KEY (client_id) REFERENCES clients(client_id)
 );
 
-INSERT INTO trainers (trainer_handle, trainer_email, trainer_password) VALUES ('el_capitan', 'el_capitan@gmail.com', 'elcapitan123');
+INSERT INTO trainers (first_name, last_name, email, password) VALUES ('el', 'capitan', 'el_capitan@gmail.com', 'elcapitan123');
 
 INSERT INTO clients (first_name, last_name) VALUES ('stephen', 'engblom');
 

@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const trainer = await pool.query('SELECT * FROM trainers WHERE trainers_email = $1', [email]);
+    const trainer = await pool.query('SELECT * FROM trainers WHERE email = $1', [email]);
 
     if (trainer.rows.length !== 0) {
       return res.status(401).send('trainer already exists');
@@ -19,7 +19,7 @@ router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(password, salt);
     console.log(bcryptPassword)
-    const newtrainer = await pool.query("INSERT INTO trainers (trainer_name, trainer_email, trainer_password) Values ($1, $2, $3) RETURNING *", [ name, email, bcryptPassword ]);
+    const newtrainer = await pool.query("INSERT INTO trainers (first_name, last_name, email, password) Values ($1, $2, $3) RETURNING *", [ first, last, email, bcryptPassword ]);
 
     const token = jwtGenerator(newtrainer.rows[0].trainer_id)
     res.json({ token });
@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const trainer = await pool.query("SELECT * FROM trainers WHERE trainer_email = $1", [ email ]);
+    const trainer = await pool.query("SELECT * FROM trainers WHERE email = $1", [ email ]);
 
     if(trainer.rows.length === 0) {
       return res.status(401).send('Password or email is incorrect');
