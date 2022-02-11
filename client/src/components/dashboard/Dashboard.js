@@ -3,8 +3,6 @@ import { toast } from "react-toastify";
 
 const Dashboard = ( { setAuth }) => {
   const [name , setName] = useState('');
-  const [allBlogs, setAllBlogs] = useState([]);
-  const [blogsChange, setBlogsChange] = useState(false);
 
   const getProfile = async () => {
     try {
@@ -16,7 +14,6 @@ const Dashboard = ( { setAuth }) => {
       const parseRes = await response.json();
 
       console.log('get profile', parseRes)
-      setAllBlogs(parseRes[1])
       setName(parseRes[0].user_name)
     } catch (err) {
       console.log('Dashboard request error');
@@ -35,14 +32,14 @@ const Dashboard = ( { setAuth }) => {
     }
   };
 
-  useEffect(() => {
-    setBlogsChange(false);
-    getProfile();
-  }, [blogsChange]);
+  // useEffect(() => {
+  //   setBlogsChange(false);
+  //   getProfile();
+  // }, [blogsChange]);
 
   return (
     <div>
-      
+
         <h1 className="mt-5">Dashboard</h1>
         <h2>Welcome {name}</h2>
         <button onClick={(e) => logout(e)} className="btn btn-primary">

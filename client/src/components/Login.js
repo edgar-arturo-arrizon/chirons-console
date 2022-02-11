@@ -10,10 +10,6 @@ const Login = ( { setAuth }) => {
 
   const { email, password } = inputs;
 
-  const togglePasswordVisibility = () => {
-    setPasswordShown(passwordShown ? false : true);
-  }
-
   const handleChange = (e) => {
     setInputs({...inputs, [e.target.name] : e.target.value})
   }
@@ -53,21 +49,35 @@ const Login = ( { setAuth }) => {
         <div className="bg-gray-200 p-16 rounded shadow-2xl w-2/3">
           <h2 className="text-3xl font-bold mb-10">Login</h2>
           <form className="space-y-8">
-            <div>
+          <div>
               <label className="block mb-1 font-bold">Email</label>
-              <input className="border border-gray-400 text-xl w-full p-3" type="text" placeholder="Email" value={email} onChange={(e) => handleChange(e)}/>
+              <input className="border border-gray-400 text-xl w-full p-3"
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => handleChange(e)}
+              />
             </div>
             <div>
               <label className="block mb-1 font-bold">Password</label>
-              <input className="border border-gray-400 text-xl w-full p-3" type={passwordShown ? "text" : "password"} placeholder="Password" value={password} onChange={(e) => handleChange(e)}/>
-              <input type="checkbox" checked={passwordShown}
-          onChange={handleOnCheck}/> show password
+              <input className="border border-gray-400 text-xl w-full p-3"
+                type={passwordShown ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => handleChange(e)}
+                />
             </div>
+            <input
+              type="checkbox"
+              checked={passwordShown}
+              onChange={handleOnCheck}
+              /> show password
             <button className="bg-blue-600 border border-black w-full hover:bg-blue-400 transition duration-300 rounded text-xl p-4">Login</button>
           </form>
+          <a className="hover:text-green-800 text-bold" href='/login'>Dont have an account? Register</a>
         </div>
       </div>
-      <Link to='/register'>Register</Link>
+
     </>
   )
 }

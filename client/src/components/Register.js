@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 
 const Register = ( { setAuth } ) => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -12,11 +11,8 @@ const Register = ( { setAuth } ) => {
 
   const { email, password, first, last } = inputs;
 
-  const togglePasswordVisibility = () => {
-    setPasswordShown(passwordShown ? false : true);
-  }
-
   const handleChange = (e) => {
+    console.log(inputs)
     setInputs({...inputs, [e.target.name] : e.target.value})
   }
 
@@ -53,23 +49,46 @@ const Register = ( { setAuth } ) => {
       <div className="bg-yellow-600 h-screen flex items-center justify-center ">
         <div className="bg-gray-200 p-16 rounded shadow-2xl w-2/3">
           <h2 className="text-3xl font-bold mb-10">Sign-Up</h2>
-          <form className="space-y-8">
+          <form className="space-y-8" onSubmit={onSubmitForm}>
             <div>
               <label className="block mb-1 font-bold">Name</label>
-              <input className="border border-gray-400 text-xl w-1/2 p-3" type="text" placeholder="First" value={first} onChange={(e) => handleChange(e)}/>
-              <input className="border border-gray-400 text-xl w-1/2 p-3" type="text" placeholder="Last" value={last} onChange={(e) => handleChange(e)} />
+              <input className="border border-gray-400 text-xl w-1/2 p-3"
+                type="text"
+                placeholder="First"
+                value={first}
+                onChange={(e) => handleChange(e)}
+              />
+              <input className="border border-gray-400 text-xl w-1/2 p-3"
+                type="text"
+                placeholder="Last"
+                value={last}
+                onChange={(e) => handleChange(e)}
+              />
             </div>
             <div>
               <label className="block mb-1 font-bold">Email</label>
-              <input className="border border-gray-400 text-xl w-full p-3" type="text" placeholder="Email" value={email} onChange={(e) => handleChange(e)}/>
+              <input className="border border-gray-400 text-xl w-full p-3"
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => handleChange(e)}
+              />
             </div>
             <div>
               <label className="block mb-1 font-bold">Password</label>
-              <input className="border border-gray-400 text-xl w-full p-3" type={passwordShown ? "text" : "password"} placeholder="Password" value={password} onChange={(e) => handleChange(e)} />
+              <input className="border border-gray-400 text-xl w-full p-3"
+                type={passwordShown ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => handleChange(e)}
+                />
             </div>
-            <input type="checkbox" checked={passwordShown}
-          onChange={handleOnCheck}/> show password
-            <button className="bg-blue-600 border border-black w-full hover:bg-blue-400 transition duration-300 rounded text-xl p-4">Login</button>
+            <input
+              type="checkbox"
+              checked={passwordShown}
+              onChange={handleOnCheck}
+              /> show password
+            <button className="bg-blue-600 border border-black w-full hover:bg-blue-400 transition duration-300 rounded text-xl p-4">Submit</button>
           </form>
           <a className="hover:text-green-800 text-bold" href='/login'>Already have an account? Login</a>
         </div>
