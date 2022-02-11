@@ -9,7 +9,7 @@ const router = express.Router();
 //registering
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { first, last, email, password } = req.body;
     const trainer = await pool.query('SELECT * FROM trainers WHERE email = $1', [email]);
 
     if (trainer.rows.length !== 0) {

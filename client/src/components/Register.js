@@ -12,7 +12,6 @@ const Register = ( { setAuth } ) => {
   const { email, password, first, last } = inputs;
 
   const handleChange = (e) => {
-    console.log(inputs)
     setInputs({...inputs, [e.target.name] : e.target.value})
   }
 
@@ -43,9 +42,9 @@ const Register = ( { setAuth } ) => {
 
   return (
     <>
-      <div className="bg-yellow-600 flex justify-center items-center">
+      {/* <div className="bg-yellow-600 flex justify-center items-center">
       <h1 className="text-6xl font-serif font-extrabold relative  top-40">Chiron's Consel</h1>
-      </div>
+      </div> */}
       <div className="bg-yellow-600 h-screen flex items-center justify-center ">
         <div className="bg-gray-200 p-16 rounded shadow-2xl w-2/3">
           <h2 className="text-3xl font-bold mb-10">Sign-Up</h2>
@@ -54,12 +53,14 @@ const Register = ( { setAuth } ) => {
               <label className="block mb-1 font-bold">Name</label>
               <input className="border border-gray-400 text-xl w-1/2 p-3"
                 type="text"
+                name='first'
                 placeholder="First"
                 value={first}
                 onChange={(e) => handleChange(e)}
               />
               <input className="border border-gray-400 text-xl w-1/2 p-3"
                 type="text"
+                name='last'
                 placeholder="Last"
                 value={last}
                 onChange={(e) => handleChange(e)}
@@ -69,6 +70,7 @@ const Register = ( { setAuth } ) => {
               <label className="block mb-1 font-bold">Email</label>
               <input className="border border-gray-400 text-xl w-full p-3"
                 type="text"
+                name='email'
                 placeholder="Email"
                 value={email}
                 onChange={(e) => handleChange(e)}
@@ -78,6 +80,7 @@ const Register = ( { setAuth } ) => {
               <label className="block mb-1 font-bold">Password</label>
               <input className="border border-gray-400 text-xl w-full p-3"
                 type={passwordShown ? "text" : "password"}
+                name='password'
                 placeholder="Password"
                 value={password}
                 onChange={(e) => handleChange(e)}

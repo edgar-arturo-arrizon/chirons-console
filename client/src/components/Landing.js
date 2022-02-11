@@ -1,18 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Register from './Register.js';
+
 
 const Landing = () => {
   return (
-    <div className="jumbotron mt-5">
-      <h1>Welcome to Todo City</h1>
-      <p>Sign In and start building your todo list</p>
-      <Link to="/login" className="btn btn-primary">
-        Login
-      </Link>
-      <Link to="/register" className="btn btn-primary ml-3">
-        Register
-      </Link>
-    </div>
+    <>
+      <div className="lg:grid lg:grid-cols-2">
+        <div className="bg-yellow-600 flex justify-center items-start">
+          <h1 className="text-6xl font-serif font-extrabold relative  top-40">Chiron's Log</h1>
+        </div>
+          <Register />
+      </div>
+    </>
   );
 };
 

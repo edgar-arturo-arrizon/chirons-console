@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 
 const Login = ( { setAuth }) => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -42,10 +41,12 @@ const Login = ( { setAuth }) => {
 
   return (
     <>
-      <div className="bg-yellow-600 flex justify-center items-center">
-        <h1 className="text-6xl font-serif font-extrabold relative  top-40">Chiron's Consel</h1>
+    <div className="lg:grid lg:grid-cols-2">
+
+      <div className="bg-yellow-600 flex justify-center items-center lg:items-start">
+        <h1 className="text-6xl font-serif font-extrabold relative  top-40">Chiron's Log</h1>
       </div>
-      <div className="bg-yellow-600 min-h-screen flex items-center justify-center ">
+      <div className="bg-yellow-600 min-h-screen flex items-center justify-center">
         <div className="bg-gray-200 p-16 rounded shadow-2xl w-2/3">
           <h2 className="text-3xl font-bold mb-10">Login</h2>
           <form className="space-y-8">
@@ -53,8 +54,9 @@ const Login = ( { setAuth }) => {
               <label className="block mb-1 font-bold">Email</label>
               <input className="border border-gray-400 text-xl w-full p-3"
                 type="text"
-                placeholder="Email"
+                name='email'
                 value={email}
+                placeholder='email'
                 onChange={(e) => handleChange(e)}
               />
             </div>
@@ -62,8 +64,9 @@ const Login = ( { setAuth }) => {
               <label className="block mb-1 font-bold">Password</label>
               <input className="border border-gray-400 text-xl w-full p-3"
                 type={passwordShown ? "text" : "password"}
-                placeholder="Password"
+                name='password'
                 value={password}
+                placeholder="Password"
                 onChange={(e) => handleChange(e)}
                 />
             </div>
@@ -74,9 +77,10 @@ const Login = ( { setAuth }) => {
               /> show password
             <button className="bg-blue-600 border border-black w-full hover:bg-blue-400 transition duration-300 rounded text-xl p-4">Login</button>
           </form>
-          <a className="hover:text-green-800 text-bold" href='/login'>Dont have an account? Register</a>
+          <a className="hover:text-green-800 text-bold" href='/register'>Dont have an account? Register</a>
         </div>
       </div>
+    </div>
 
     </>
   )
