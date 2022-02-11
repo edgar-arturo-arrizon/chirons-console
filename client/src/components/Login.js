@@ -35,7 +35,7 @@ const Login = ( { setAuth }) => {
       setAuth(true);
     } catch (err) {
       console.log('error at login')
-      console.error(err.message);
+      console.error(err.message, 'Error at user Login');
     }
   }
 
@@ -49,7 +49,7 @@ const Login = ( { setAuth }) => {
       <div className="bg-yellow-600 min-h-screen flex items-center justify-center">
         <div className="bg-gray-200 p-16 rounded shadow-2xl w-2/3">
           <h2 className="text-3xl font-bold mb-10">Login</h2>
-          <form className="space-y-8">
+          <form className="space-y-8" onSubmit={onSubmitForm}>
           <div>
               <label className="block mb-1 font-bold">Email</label>
               <input className="border border-gray-400 text-xl w-full p-3"

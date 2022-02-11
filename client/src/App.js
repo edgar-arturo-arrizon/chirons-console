@@ -14,16 +14,16 @@ import {
 function App() {
   const checkAuthenticated = async () => {
     try {
-      const res = await fetch("http://localhost:5000/authentication/verify", {
+      const res = await fetch("http://localhost:5000/auth/verify", {
         method: "POST",
         headers: { jwt_token: localStorage.token }
       });
 
       const parseRes = await res.json();
-
+      console.log(parseRes)
       parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
     } catch (err) {
-      console.error(err.message);
+      console.error(err.message, 'Error authenticating user, checkAuthenticaed function in App component');
     }
   };
 
@@ -47,7 +47,7 @@ function App() {
               path="/"
               element={
                 !isAuthenticated ? (
-                  <Landing />
+                  <Landing setAuth={setAuth}/>
                 ) : (
                   <Navigate to="/dashboard" />
                 )

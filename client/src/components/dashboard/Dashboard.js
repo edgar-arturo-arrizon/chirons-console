@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { toast } from "react-toastify";
 
 const Dashboard = ( { setAuth }) => {
-  const [name , setName] = useState('');
+  const [name , setName] = useState('test');
 
   const getProfile = async () => {
     try {
