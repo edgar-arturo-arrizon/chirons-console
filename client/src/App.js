@@ -31,7 +31,7 @@ function App() {
     checkAuthenticated();
   }, []);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const setAuth = boolean => {
     setIsAuthenticated(boolean);

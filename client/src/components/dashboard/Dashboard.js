@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from "react-toastify";
+import {client_data} from '../../client_data.js';
+
+import Navbar from './Navbar.js';
+import ClientList from './ClientList.js';
+
+
+const tenClients = client_data.slice(0,11)
 
 const Dashboard = ( { setAuth }) => {
   const [name , setName] = useState('');
+  const [clients, setClients] = useState(tenClients)
+
 
   const getProfile = async () => {
     try {
@@ -13,24 +22,13 @@ const Dashboard = ( { setAuth }) => {
 
       const parseRes = await response.json();
 
-      console.log('get profile', parseRes)
-      setName(parseRes[0].user_name)
+      // console.log('get profile', parseRes)
+      setName(parseRes[0])
     } catch (err) {
       console.log('Dashboard request error');
       console.error(err.message);
     }
   }
-
-  const logout = async e => {
-    e.preventDefault();
-    try {
-      localStorage.removeItem("token");
-      setAuth(false);
-      toast.success("Logout successfully");
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
 
   useEffect(() => {
     // setBlogsChange(false);
@@ -39,26 +37,8 @@ const Dashboard = ( { setAuth }) => {
 
   return (
     <>
-    <div className="bg-blue-600 h-screen">
-      <div name="dashboard">
-        <h1 className="">Dashboard</h1>
-        <h2>Welcome {name}</h2>
-        <button onClick={(e) => logout(e)} className="btn btn-primary">
-          Logout
-        </button>
-      </div>
-
-      <div name="filter + list">
-        <div>
-          Filter
-        </div>
-        <div>
-          client list
-        </div>
-      </div>
-
-
-    </div>
+      <Navbar />
+      <ClientList clients={clients} setClients={setClients}/>
     </>
   )
 }
