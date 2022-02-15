@@ -6,10 +6,11 @@ import {
   Routes
  } from 'react-router-dom';
 
+ import Landing from "./components/Landing";
  import Login from "./components/Login";
  import Register from "./components/Register";
  import Dashboard from "./components/dashboard/Dashboard";
- import Landing from "./components/Landing";
+ import ClientProfile from './components/dashboard/clientprofile/ClientProfile';
 
 function App() {
   const checkAuthenticated = async () => {
@@ -31,7 +32,7 @@ function App() {
     checkAuthenticated();
   }, []);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const setAuth = boolean => {
     setIsAuthenticated(boolean);
@@ -81,6 +82,17 @@ function App() {
               element={
                 isAuthenticated ? (
                   <Dashboard setAuth={setAuth} />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/client"
+              element={
+                isAuthenticated ? (
+                  <ClientProfile setAuth={setAuth} />
                 ) : (
                   <Navigate to="/login" />
                 )

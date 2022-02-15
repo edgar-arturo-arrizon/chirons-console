@@ -19,9 +19,9 @@ CREATE TABLE clients(
   client_id SERIAL,
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL,
   age INT,
   weight INT,
-  -- blog_body TEXT NOT NULL,
   trainer_id UUID,
   created_at DATE DEFAULT CURRENT_DATE,
   PRIMARY KEY (client_id),
@@ -49,9 +49,9 @@ CREATE TABLE exercise_stats(
   FOREIGN KEY (exercise_id) REFERENCES exercises(exercise_id)
 );
 
--- INSERT INTO trainers (first_name, last_name, email, password) VALUES ('el', 'capitan', 'el_capitan@gmail.com', 'elcapitan123');
+INSERT INTO trainers (first_name, last_name, email, password) VALUES ('andrea', 'arrizon', 'andrea@gmail.com', 'andrea123');
 
--- INSERT INTO clients (first_name, last_name) VALUES ('stephen', 'engblom');
+-- INSERT INTO clients (first_name, last_name, age, weight, trainer_id) VALUES ('stephen', 'engblom', 50, 205);
 
 -- INSERT INTO exercises (name, heaviest_weight) VALUES ('squat', '195.5');
 
