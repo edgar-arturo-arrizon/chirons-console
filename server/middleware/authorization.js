@@ -5,7 +5,6 @@ dotenv.config()
 
 export default function async (req, res, next) {
   const token = req.header('token');
-
   if (!token) {
     return res.status(403).json('Not Authorize');
   }

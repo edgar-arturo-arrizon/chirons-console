@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from "react-toastify";
+import { client_data } from '../../client_data.js';
+
+import Navbar from './Navbar.js';
+import ClientList from './ClientList.js';
+import ClientProfile from './clientprofile/ClientProfile.js';
+
+
+const tenClients = client_data.slice(0,11)
 
 const Dashboard = ( { setAuth }) => {
-  const [name , setName] = useState('');
+  const [clients, setClients] = useState([]);
+  const [clientsChange, setClientsChange] = useState(false);
+  const [filteredClients, setFilteredClients] = useState([]);
+  const [view, setView] = useState('clientList');
 
   const getProfile = async () => {
     try {
@@ -12,53 +23,50 @@ const Dashboard = ( { setAuth }) => {
       });
 
       const parseRes = await response.json();
+      const clientsRes = parseRes.slice(1);
 
-      console.log('get profile', parseRes)
-      setName(parseRes[0].user_name)
+      setClients(...clientsRes)
     } catch (err) {
       console.log('Dashboard request error');
       console.error(err.message);
     }
   }
 
-  const logout = async e => {
-    e.preventDefault();
+  const getClientProfile = async (client) => {
+
     try {
-      localStorage.removeItem("token");
-      setAuth(false);
-      toast.success("Logout successfully");
+     const response = await fetch('http://localhost:5000/dashboard/client', {
+         method: 'GET',
+         headers: { 'token': localStorage.token, 'client' : client.client_id },
+       });
+
+      const parseRes = await response.json();
     } catch (err) {
-      console.error(err.message);
+       console.error(err.message, 'Error getting client profile')
     }
-  };
+
+    setView('clientProfile')
+   };
 
   useEffect(() => {
-    // setBlogsChange(false);
+    setClientsChange(false);
     getProfile();
-  }, []);
+  }, [clientsChange]);
 
   return (
     <>
-    <div className="bg-blue-600 h-screen">
-      <div name="dashboard">
-        <h1 className="">Dashboard</h1>
-        <h2>Welcome {name}</h2>
-        <button onClick={(e) => logout(e)} className="btn btn-primary">
-          Logout
-        </button>
-      </div>
+        <Navbar setAuth={setAuth} clients={clients} setClients={setClients} setClientsChange={setClientsChange} setFilteredClients={setFilteredClients} setView={setView} />
 
-      <div name="filter + list">
-        <div>
-          Filter
-        </div>
-        <div>
-          client list
-        </div>
-      </div>
+        {view === 'clientList' &&
+        <ClientList clients={clients} getClientProfile={getClientProfile} setClients={setClients} setAuth={setAuth} setClientsChange={setClientsChange} filteredClients={filteredClients}  />}
 
+        {view === 'filteredClients' &&
+        <ClientList clients={filteredClients} getClientProfile={getClientProfile} setClients={setClients} setAuth={setAuth} setClientsChange={setClientsChange}  />}
 
-    </div>
+        {view === 'clientProfile' &&
+        <ClientProfile clients={clients} getClientProfile={getClientProfile} setClients={setClients}/>
+      }
+
     </>
   )
 }
